@@ -400,8 +400,9 @@ public class JumpEnd extends LogicElement {
 			JLabel heading = new JLabel("Select Wire Name",SwingConstants.CENTER);
 			heading.setAlignmentX((float)0.5);
 			window.add(heading);
-
-			starts = new JList<String>((String[]) circuit.getJumpStartNames().toArray());
+			Object objects[] = circuit.getJumpStartNames().toArray();
+			String strings[] = Arrays.copyOf(objects, objects.length,String[].class); //new way of converting Object[] to String[]
+			starts = new JList<String>(strings);// Old way of conversion (String[])circuit.getJumpStartNames().toArray());
 			starts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			starts.setVisibleRowCount(Math.min(circuit.getJumpStartNames().size(),10));
 			JScrollPane pane = new JScrollPane(starts);

@@ -769,6 +769,7 @@ public abstract class Gate extends LogicElement {
 				inputsPad.close();
 				gatesPad.close();
 				dispose();
+				
 			}
 			
 			// if repeat previous button, set previous values

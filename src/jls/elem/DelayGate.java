@@ -57,7 +57,9 @@ public class DelayGate extends Gate {
 
 		// show creation dialog
 		Point pos = editWindow.getMousePosition();
+		System.out.println(pos);
 		Point win = editWindow.getLocationOnScreen();
+		System.out.println(win);
 		if (pos == null) {
 			new DelayCreate(x+win.x,y+win.y);
 		}
@@ -74,7 +76,9 @@ public class DelayGate extends Gate {
 		init(g);
 		
 		// save position
-		Point p = editWindow.getMousePosition();
+		//Point p = editWindow.getMousePosition(); //For some reason this only causes an issue in the DelayGate 
+		Point p = MouseInfo.getPointerInfo().getLocation(); //change to different way of getting mouse position
+		SwingUtilities.convertPointFromScreen(p, editWindow);	//converting mouse position with respect to editWindow
 		if (p != null)
 			super.setXY(p.x-width/2,p.y-height/2);
 		

@@ -10,6 +10,7 @@ import java.awt.GridLayout;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -47,6 +48,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import jls.Circuit;
 import jls.JLSInfo;
@@ -408,50 +410,50 @@ public abstract class SimpleEditor extends JPanel {
 
 				// set up popup menus
 				probe.setToolTipText("watch activity on this wire during simulation");
-				probe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,InputEvent.CTRL_MASK));
+				probe.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); //changed all instances of InputEvent.CTRL_MASK to Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() to use ctrl/command depending on hardware 
 				watch.setToolTipText("watch activity on this element during simulation");
-				watch.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,InputEvent.CTRL_MASK));
+				watch.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				modify.setToolTipText("view/modify element details");
-				modify.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,InputEvent.CTRL_MASK));
+				modify.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				timing.setToolTipText("change propagation delay or access time");
-				timing.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,InputEvent.CTRL_MASK));
+				timing.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				view.setToolTipText("view current simulated value");
-				view.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_MASK));
+				view.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				cut.setToolTipText("cut all selected elements to clipboard");
-				cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,InputEvent.CTRL_MASK));
+				cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				copy.setToolTipText("copy all selected elements to clipboard");
-				copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_MASK));
+				copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				delete.setToolTipText("delete all selected elements");
 				delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
 				lock.setToolTipText("make selected elements uneditable (cannot be undone)");
-				lock.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,InputEvent.CTRL_MASK));
+				lock.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
 				// TODO: Make an action for this.
 				//matchJump.setToolTipText("create the wire end to match this wire start");
 				//matchJump.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,InputEvent.CTRL_MASK));
 
 				connect.setToolTipText("create a new wire");
-				connect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,InputEvent.CTRL_MASK));
+				connect.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(connect);
 
 				paste.setToolTipText("paste contents of clipboard");
-				paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_MASK));
+				paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(paste);
 
 				selAll.setToolTipText("select all elements");
-				selAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK));
+				selAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(selAll);
 
 				close.setToolTipText("close this circuit");
-				close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,InputEvent.CTRL_MASK));
+				close.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(close);
 
 				undo.setToolTipText("undo last modification");
-				undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,InputEvent.CTRL_MASK));
+				undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(undo);
 
 				redo.setToolTipText("redo last undo");
-				redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y,InputEvent.CTRL_MASK));
+				redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				newMenu.add(redo);
 
 				makeElements();
@@ -536,7 +538,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_W,InputEvent.CTRL_MASK),"ctrlw");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_W,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"ctrlw");
 				getActionMap().put("ctrlw", ctrlw);
 
 				// set up end wire key binding
@@ -603,7 +605,7 @@ public abstract class SimpleEditor extends JPanel {
 
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_S,InputEvent.CTRL_MASK),"view");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_S,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"view");
 				getActionMap().put("view", see);
 
 				// set up modify key binding
@@ -621,7 +623,7 @@ public abstract class SimpleEditor extends JPanel {
 						doModify();
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_M,InputEvent.CTRL_MASK),"modify");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_M,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"modify");
 				getActionMap().put("modify", modify);
 
 				// set up probe key binding
@@ -644,7 +646,7 @@ public abstract class SimpleEditor extends JPanel {
 						doProbe();
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_P,InputEvent.CTRL_MASK),"probe");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_P,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"probe");
 				getActionMap().put("probe", probe);
 
 				// set up timing key binding
@@ -667,7 +669,7 @@ public abstract class SimpleEditor extends JPanel {
 						doTiming();
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_T,InputEvent.CTRL_MASK),"timing");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_T,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"timing");
 				getActionMap().put("timing",timing);
 
 				// set up selectAll key binding
@@ -681,7 +683,7 @@ public abstract class SimpleEditor extends JPanel {
 						doSelectAll();
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A,InputEvent.CTRL_MASK),"select all");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_A,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"select all");
 				getActionMap().put("select all", selectAll);
 
 				// set up close window key binding
@@ -690,7 +692,7 @@ public abstract class SimpleEditor extends JPanel {
 						close();
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_E,InputEvent.CTRL_MASK),"close window");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_E,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"close window");
 				getActionMap().put("close window", closeWin);
 
 				// set up delete key binding
@@ -721,7 +723,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_X,InputEvent.CTRL_MASK),"do cut");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do cut");
 				getActionMap().put("do cut", cutKey);
 
 				// set up copy key binding
@@ -735,7 +737,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_MASK),"do copy");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_C,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do copy");
 				getActionMap().put("do copy", copyKey);
 
 				// set up paste key binding
@@ -751,7 +753,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_MASK),"do paste");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do paste");
 				getActionMap().put("do paste", pasteKey);
 
 				// set up undo key binding
@@ -763,7 +765,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,InputEvent.CTRL_MASK),"do undo");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Z,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do undo");
 				getActionMap().put("do undo", undoKey);
 
 				// set up redo key binding
@@ -775,7 +777,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,InputEvent.CTRL_MASK),"do redo");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_Y,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do redo");
 				getActionMap().put("do redo", redoKey);
 
 				// set up lock key binding
@@ -805,7 +807,7 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_L,InputEvent.CTRL_MASK),"do lock");
+				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_L,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),"do lock");
 				getActionMap().put("do lock", lockKey);
 
 			} // end of constructor
@@ -2236,8 +2238,7 @@ public abstract class SimpleEditor extends JPanel {
 			 * @param event Unused.
 			 */
 			public void mouseEntered(MouseEvent event) {
-
-				requestFocusInWindow(true);
+				requestFocusInWindow();
 			} // end of mouseEntered method
 
 			/**
@@ -2246,7 +2247,6 @@ public abstract class SimpleEditor extends JPanel {
 			 * @param event Unused.
 			 */
 			public void mouseExited(MouseEvent event) {
-
 				if (currentState == State.idle) {
 					for (Element el : circuit.getElements()) {
 						el.setHighlight(false);
@@ -3676,7 +3676,11 @@ public abstract class SimpleEditor extends JPanel {
 						if (item.setup(graphics,this,dx+view.x,dy+view.y)) {
 
 							// put into circuit
-							Point pos = getMousePosition();
+							
+							
+							//Point pos = getMousePosition(); //works fine on Windows, not so well on Mac
+							Point pos = MouseInfo.getPointerInfo().getLocation(); //This way seems to work well on both systems
+							SwingUtilities.convertPointFromScreen(pos, this);	  //converting mouse location relative to the component
 							if (pos == null) {
 
 								// add to circuit and selected set
