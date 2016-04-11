@@ -13,7 +13,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -1247,7 +1246,8 @@ public abstract class SimpleEditor extends JPanel {
 				info.setText("");
 
 				// if probe option selected
-				if (event.getSource() == probe) {
+
+				if (event.getSource() != probe) { //ORIGINAL LINE if(event.getSource() == probe) {//WHY? Prevent checking whether or not other events are checked
 
 					// do nothing if editor is disabled
 					if (!enabled)
@@ -1262,7 +1262,7 @@ public abstract class SimpleEditor extends JPanel {
 
 					// if watch option selected, ...
 					if (event.getSource() == watch) {
-
+						
 						// do nothing if editor is disabled
 						if (!enabled)
 							return;
