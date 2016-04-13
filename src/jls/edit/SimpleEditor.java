@@ -13,6 +13,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -423,7 +424,12 @@ public abstract class SimpleEditor extends JPanel {
 				copy.setToolTipText("copy all selected elements to clipboard");
 				copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 				delete.setToolTipText("delete all selected elements");
-				delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
+				if(Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() == InputEvent.META_MASK){
+					delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE,KeyEvent.META_MASK));
+				}else{
+					delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
+				}
+				
 				lock.setToolTipText("make selected elements uneditable (cannot be undone)");
 				lock.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L,Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
@@ -706,7 +712,12 @@ public abstract class SimpleEditor extends JPanel {
 						}
 					}
 				};
-				getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0),"do delete");
+				if(Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()==InputEvent.META_MASK){
+					getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE,KeyEvent.META_MASK),"do delete");
+				}else{
+					getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0),"do delete");
+				}
+				
 				getActionMap().put("do delete", deleteKey);
 
 				// set up cut key binding
